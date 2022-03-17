@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "43d850df-5314-4391-a45c-9da43ad24184",
+		"name": "Kasa Beer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All beers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test('item contains` several requirements', () => {\r",
+							"    _.each(jsonData.beers, (beer) => {\r",
+							"        pm.expect(beers.yeast).to.include('Wyeast 3522 - Belgian Ardennes') &&\r",
+							"        pm.expect(beers.ingridients.hops.name).to.include('Tomahawk') &&\r",
+							"        pm.expect(beers.ingridients.hops.amount.value).to.equal('12.5') &&\r",
+							"        pm.expect(beers.ibu).to.be.not.equal('0') &&\r",
+							"        pm.expect(beers.description).to.be.not.empty\r",
+							"    })\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.punkapi.com/v2/beers",
+					"protocol": "https",
+					"host": [
+						"api",
+						"punkapi",
+						"com"
+					],
+					"path": [
+						"v2",
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get beer with yeast and hops",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.punkapi.com/v2/beers?yeast=Wyeast 3522 - Belgian Ardennes&ingridients={\"hops\":{[\"name\": \"Tomahawk\"]}}&ingridients={\"hops\":{[\"amount\": {\"value\":\"12.5\"}]}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"punkapi",
+						"com"
+					],
+					"path": [
+						"v2",
+						"beers"
+					],
+					"query": [
+						{
+							"key": "yeast",
+							"value": "Wyeast 3522 - Belgian Ardennes"
+						},
+						{
+							"key": "ingridients",
+							"value": "{\"hops\":{[\"name\": \"Tomahawk\"]}}"
+						},
+						{
+							"key": "ingridients",
+							"value": "{\"hops\":{[\"amount\": {\"value\":\"12.5\"}]}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
